@@ -138,4 +138,34 @@ public class PayStationImplTest {
         assertEquals("Insert after cancel should work",
                 10, ps.readDisplay());
     }
+    
+    @Test 
+    public void testEmpty() throws IllegalCoinException {
+        
+        ps.cancel();
+        ps.addPayment(25);
+        ps.addPayment(10);
+        Receipt r1 = ps.buy();
+        assertEquals("Next buy should return valid receipt",
+                35, r1.value());
+        
+        ps.addPayment(25);
+        ps.addPayment(25);
+        Receipt r2 = ps.buy();
+        assertEquals("Next buy should return valid receipt",
+                50, r2.value());
+        
+        ps.addPayment(25);
+        ps.addPayment(35);
+        ps.cancel();
+        assertEquals("Cancel should clear display",
+                0, ps.readDisplay());
+        
+        //ps.empty();
+        int totalAddedSinceLastEmptyCall = ps.empty();
+        assertEquals("totalAddedSinceLastEmptyCall should be 85",
+               85, totalAddedSinceLastEmptyCall);
+        
+         
+    }
 }
