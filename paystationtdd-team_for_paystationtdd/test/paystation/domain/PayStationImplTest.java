@@ -142,21 +142,20 @@ public class PayStationImplTest {
     @Test 
     public void testEmpty() throws IllegalCoinException {
         
-        ps.cancel();
-        ps.addPayment(25);
+        ps.addPayment(25); 
         ps.addPayment(10);
-        Receipt r1 = ps.buy();
+        Receipt r1 = ps.buy(); //selects buy after entering 35 cents to 
         assertEquals("Next buy should return valid receipt",
-                35, r1.value());
+                14, r1.value());
         
         ps.addPayment(25);
         ps.addPayment(25);
         Receipt r2 = ps.buy();
         assertEquals("Next buy should return valid receipt",
-                50, r2.value());
+                20, r2.value());
         
         ps.addPayment(25);
-        ps.addPayment(35);
+        ps.addPayment(5);
         ps.cancel();
         assertEquals("Cancel should clear display",
                 0, ps.readDisplay());

@@ -51,6 +51,9 @@ public interface PayStation {
      */
     public void cancel();
 
+    /*
+    * Resets the money thats been entered since last checked variable
+    */
     public int empty();
 
 }
