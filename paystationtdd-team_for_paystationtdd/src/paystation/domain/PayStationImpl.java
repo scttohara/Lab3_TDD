@@ -23,7 +23,10 @@ public class PayStationImpl implements PayStation {
     
     private int insertedSoFar;
     private int timeBought;
-
+    
+    //global variable to hold total amount of money entered
+    private int totalSinceLastCheck; 
+    
     @Override
     public void addPayment(int coinValue)
             throws IllegalCoinException {
@@ -45,6 +48,11 @@ public class PayStationImpl implements PayStation {
 
     @Override
     public Receipt buy() {
+        
+        //adds the amount entered when "buy" was selected to the total 
+        //amount of money in the machine
+        totalSinceLastCheck += insertedSoFar; 
+
         Receipt r = new ReceiptImpl(timeBought);
         reset();
         return r;
@@ -60,7 +68,15 @@ public class PayStationImpl implements PayStation {
     }
 
     @Override
-    public int empty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int empty() { 
+    
+        // sets the total amount of money entered since last checked to temp
+        int temp = totalSinceLastCheck; 
+        
+        // resets the total amount since last checked to 0 
+        totalSinceLastCheck = 0;
+                
+        return temp; // returns the total amount 
+    
     }
 }
