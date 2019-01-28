@@ -141,6 +141,9 @@ public class PayStationImplTest {
                 10, ps.readDisplay());
     }
     
+    /**
+     * Verify that cancel will clear the pay station
+     */
     @Test 
     public void testEmpty() throws IllegalCoinException {
         
@@ -172,19 +175,55 @@ public class PayStationImplTest {
     
     /**
      * Verify that cancel will map out the coins in the pay station
+     * @throws paystation.domain.IllegalCoinException
      */
      @Test
     public void testCancel()
             throws IllegalCoinException {
+        
+        
+//        ps.addPayment(10);
+       Map<Integer, Integer> items = ps.cancel(); //get the map of the entered coin
+//        int num = items.get(10);
+//        assertEquals("one coin entered will return",
+//                1 , num );
+        
+        ps.addPayment(25);
+        ps.addPayment(25);
+        Receipt r = ps.buy();
+        int num = items.get(25);
+        assertEquals("the ticket has been bought so no coin will return",
+                0, num);
+        
         ps.addPayment(10);
-        Map<Integer, Integer> items = ps.cancel();
-        int num = items.get(10);
-        assertEquals("Cancel should clear display",
-                1 , num );
+        ps.addPayment(10);
+        ps.addPayment(10);
+        ps.addPayment(5);
+        ps.addPayment(5);
+        ps.addPayment(25);
+        ps.addPayment(25);
         ps.addPayment(25);
         items = ps.cancel();
-        num = items.get(25);
-        assertEquals("Insert after cancel should work",
-                1, num);
+        int num1 = items.get(5);
+        int num2 = items.get(10);
+        int num3 = items.get(25);
+        assertEquals("mixture of coins entered will return \n nikel = 2",
+                2, num1);
+        assertEquals("Dime = 3",
+                3, num2);
+        assertEquals("quarter = 3",
+                3, num3);
+        
+        ps.addPayment(25);
+        ps.addPayment(25);
+        Receipt r1 = ps.buy();
+        int num_of_quarter = items.get(25);
+        int num_of_dime = items.get(10);
+        int num_of_nikel = items.get(5);
+        
+        assertEquals("the ticket has been bought so no coin will return",
+                2, num);
+        assertEquals("the ticket has been bought so no coin will return",
+                0, num2);
     }
 }

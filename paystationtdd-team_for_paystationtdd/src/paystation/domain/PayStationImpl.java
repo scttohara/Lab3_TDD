@@ -30,15 +30,38 @@ public class PayStationImpl implements PayStation {
     //global variable to hold total amount of money entered
     private int totalSinceLastCheck; 
     
+    //global variable to hold total amount of each coins
+    private int totalNikel; 
+    private int totalDime; 
+    private int totalQuarter; 
+    private Map<Integer, Integer> items = new HashMap<>();
     
     
     @Override
     public void addPayment(int coinValue)
             throws IllegalCoinException {
+        
         switch (coinValue) {
-            case 5: break;
-            case 10: break;
-            case 25: break;
+            
+            case 5:
+                if (items.containsKey(5) == false)
+                    items.put(5, totalNikel);
+                   
+                else
+                    totalNikel++;
+                break;
+            case 10: 
+                if (items.containsKey(10) == true)
+                    totalDime++;
+                else
+                   items.put(10, totalDime);
+                break;
+            case 25: 
+                if (items.containsKey(25) == true)
+                    totalQuarter++;
+                else
+                   items.put(5, totalQuarter); 
+                break;
             default:
                 throw new IllegalCoinException("Invalid coin: " + coinValue);
         }
@@ -65,16 +88,17 @@ public class PayStationImpl implements PayStation {
 
     @Override
     public Map<Integer, Integer> cancel() {
-        Map<Integer, Integer> items = new HashMap<Integer,Integer>();
-        items.put(5, 0);
-        items.put(10, 0);
-        items.put(25, 0);
-        reset();
-        return items;
+        Map<Integer, Integer> coins = new HashMap<>();
+        coins.put(5, items.get(5));
+        coins.put(10, items.get(10));
+        coins.put(25, items.get(25));
+        reset(); //reset all coins to zero
+        return coins;
     }
     
     private void reset() {
         timeBought = insertedSoFar = 0;
+        totalNikel= totalDime= totalQuarter=0;
     }
 
     @Override
