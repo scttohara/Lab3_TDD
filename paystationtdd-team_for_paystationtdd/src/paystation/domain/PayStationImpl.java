@@ -1,5 +1,8 @@
 package paystation.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Implementation of the pay station.
  *
@@ -26,6 +29,8 @@ public class PayStationImpl implements PayStation {
     
     //global variable to hold total amount of money entered
     private int totalSinceLastCheck; 
+    
+    
     
     @Override
     public void addPayment(int coinValue)
@@ -59,8 +64,13 @@ public class PayStationImpl implements PayStation {
     }
 
     @Override
-    public void cancel() {
+    public Map<Integer, Integer> cancel() {
+        Map<Integer, Integer> items = new HashMap<Integer,Integer>();
+        items.put(5, 0);
+        items.put(10, 0);
+        items.put(25, 0);
         reset();
+        return items;
     }
     
     private void reset() {
