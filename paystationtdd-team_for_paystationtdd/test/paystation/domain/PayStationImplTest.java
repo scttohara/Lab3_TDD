@@ -11,6 +11,8 @@
  */
 package paystation.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -166,5 +168,23 @@ public class PayStationImplTest {
                85, totalAddedSinceLastEmptyCall);
         
          
+    }
+    
+    /**
+     * Verify that cancel will map out the coins in the pay station
+     */
+     @Test
+    public void testCancel()
+            throws IllegalCoinException {
+        ps.addPayment(10);
+        Map<Integer, Integer> items = ps.cancel();
+        int num = items.get(10);
+        assertEquals("Cancel should clear display",
+                1 , num );
+        ps.addPayment(25);
+        items = ps.cancel();
+        num = items.get(25);
+        assertEquals("Insert after cancel should work",
+                1, num);
     }
 }
