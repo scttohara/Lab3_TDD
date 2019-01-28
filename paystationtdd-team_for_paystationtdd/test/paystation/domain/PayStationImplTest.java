@@ -129,46 +129,46 @@ public class PayStationImplTest {
     /**
      * Verify that cancel clears the pay station
      */
-//    @Test
-//    public void shouldClearAfterCancel()
-//            throws IllegalCoinException {
-//        ps.addPayment(10);
-//        ps.cancel();
-//        assertEquals("Cancel should clear display",
-//                0, ps.readDisplay());
-//        ps.addPayment(25);
-//        assertEquals("Insert after cancel should work",
-//                10, ps.readDisplay());
-//    }
+    @Test
+    public void shouldClearAfterCancel()
+            throws IllegalCoinException {
+        ps.addPayment(10);
+        ps.cancel();
+        assertEquals("Cancel should clear display",
+                0, ps.readDisplay());
+        ps.addPayment(25);
+        assertEquals("Insert after cancel should work",
+                10, ps.readDisplay());
+    }
     
-//    @Test 
-//    public void testEmpty() throws IllegalCoinException {
-//        
-//        ps.addPayment(25); 
-//        ps.addPayment(10);
-//        Receipt r1 = ps.buy(); //selects buy after entering 35 cents to 
-//        assertEquals("Next buy should return valid receipt",
-//                14, r1.value());
-//        
-//        ps.addPayment(25);
-//        ps.addPayment(25);
-//        Receipt r2 = ps.buy();
-//        assertEquals("Next buy should return valid receipt",
-//                20, r2.value());
-//        
-//        ps.addPayment(25);
-//        ps.addPayment(5);
-//        ps.cancel();
-//        assertEquals("Cancel should clear display",
-//                0, ps.readDisplay());
-//        
-//        //ps.empty();
-//        int totalAddedSinceLastEmptyCall = ps.empty();
-//        assertEquals("totalAddedSinceLastEmptyCall should be 85",
-//               85, totalAddedSinceLastEmptyCall);
-//        
-//         
-//    }
+    @Test 
+    public void testEmpty() throws IllegalCoinException {
+        
+        ps.addPayment(25); 
+        ps.addPayment(10);
+        Receipt r1 = ps.buy(); //selects buy after entering 35 cents to 
+        assertEquals("Next buy should return valid receipt",
+                14, r1.value());
+        
+        ps.addPayment(25);
+        ps.addPayment(25);
+        Receipt r2 = ps.buy();
+        assertEquals("Next buy should return valid receipt",
+                20, r2.value());
+        
+        ps.addPayment(25);
+        ps.addPayment(5);
+        ps.cancel();
+        assertEquals("Cancel should clear display",
+                0, ps.readDisplay());
+        
+        //ps.empty();
+        int totalAddedSinceLastEmptyCall = ps.empty();
+        assertEquals("totalAddedSinceLastEmptyCall should be 85",
+               85, totalAddedSinceLastEmptyCall);
+        
+         
+    }
     
     /**
      * Verify that cancel will map out the coins in the pay station
