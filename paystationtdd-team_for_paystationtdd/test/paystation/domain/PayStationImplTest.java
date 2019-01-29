@@ -182,18 +182,18 @@ public class PayStationImplTest {
             throws IllegalCoinException {
         
         
-//        ps.addPayment(10);
-       Map<Integer, Integer> items = ps.cancel(); //get the map of the entered coin
-//        int num = items.get(10);
-//        assertEquals("one coin entered will return",
-//                1 , num );
+        ps.addPayment(10);
+        Map<Integer, Integer> coins = ps.cancel(); //get the map of the entered coin
+        int num = coins.get(10);
+        assertEquals("one coin entered will return",
+                1 , num );
         
         ps.addPayment(25);
         ps.addPayment(25);
         Receipt r = ps.buy();
-        int num = items.get(25);
+        boolean number = coins.containsKey(25);
         assertEquals("the ticket has been bought so no coin will return",
-                0, num);
+                false, number);
         
         ps.addPayment(10);
         ps.addPayment(10);
@@ -203,10 +203,10 @@ public class PayStationImplTest {
         ps.addPayment(25);
         ps.addPayment(25);
         ps.addPayment(25);
-        items = ps.cancel();
-        int num1 = items.get(5);
-        int num2 = items.get(10);
-        int num3 = items.get(25);
+        coins = ps.cancel();
+        int num1 = coins.get(5);
+        int num2 = coins.get(10);
+        int num3 = coins.get(25);
         assertEquals("mixture of coins entered will return \n nikel = 2",
                 2, num1);
         assertEquals("Dime = 3",
@@ -217,13 +217,13 @@ public class PayStationImplTest {
         ps.addPayment(25);
         ps.addPayment(25);
         Receipt r1 = ps.buy();
-        int num_of_quarter = items.get(25);
-        int num_of_dime = items.get(10);
-        int num_of_nikel = items.get(5);
+        boolean num_of_quarter = coins.containsKey(25);
+        boolean num_of_dime = coins.containsKey(10);
+        boolean num_of_nikel = coins.containsKey(5);
         
         assertEquals("the ticket has been bought so no coin will return",
-                2, num);
+                false, num_of_quarter);
         assertEquals("the ticket has been bought so no coin will return",
-                0, num2);
+                false, num_of_nikel);
     }
 }
