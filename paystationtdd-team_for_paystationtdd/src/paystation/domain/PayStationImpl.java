@@ -34,7 +34,7 @@ public class PayStationImpl implements PayStation {
     private int totalNikel; 
     private int totalDime; 
     private int totalQuarter; 
-    private Map<Integer, Integer> items = new HashMap<>();
+    
     
     
     @Override
@@ -44,23 +44,13 @@ public class PayStationImpl implements PayStation {
         switch (coinValue) {
             
             case 5:
-                if (items.containsKey(5) == false)
-                    items.put(5, totalNikel);
-                   
-                else
-                    totalNikel++;
+                totalNikel++;
                 break;
             case 10: 
-                if (items.containsKey(10) == true)
-                    totalDime++;
-                else
-                   items.put(10, totalDime);
+                totalDime++;
                 break;
             case 25: 
-                if (items.containsKey(25) == true)
-                    totalQuarter++;
-                else
-                   items.put(5, totalQuarter); 
+                totalQuarter++;
                 break;
             default:
                 throw new IllegalCoinException("Invalid coin: " + coinValue);
@@ -82,23 +72,41 @@ public class PayStationImpl implements PayStation {
         totalSinceLastCheck += insertedSoFar; 
 
         Receipt r = new ReceiptImpl(timeBought);
+        
         reset();
+        coins.clear();
         return r;
     }
 
+    private Map<Integer, Integer> coins = new HashMap<>();
+       
+       
     @Override
     public Map<Integer, Integer> cancel() {
-        Map<Integer, Integer> coins = new HashMap<>();
-        coins.put(5, items.get(5));
-        coins.put(10, items.get(10));
-        coins.put(25, items.get(25));
+        
         reset(); //reset all coins to zero
         return coins;
     }
     
     private void reset() {
+        
+        
+       int nickel = totalNikel;
+       int dime = totalDime;
+       int quarter = totalQuarter;
+        if (nickel>0){
+            coins.put(5, nickel);
+        }
+        if (dime>0){
+            coins.put(10, dime);
+        }
+        if (quarter>0){
+            coins.put(25, quarter);
+        }
+        
         timeBought = insertedSoFar = 0;
-        totalNikel= totalDime= totalQuarter=0;
+        totalNikel = totalDime = totalQuarter=0;
+        
     }
 
     @Override
