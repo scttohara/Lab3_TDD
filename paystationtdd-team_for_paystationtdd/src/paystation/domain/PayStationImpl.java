@@ -28,7 +28,7 @@ public class PayStationImpl implements PayStation {
     private int timeBought;
     
     //global variable to hold total amount of money entered
-    private int totalSinceLastCheck; 
+    private static int totalSinceLastCheck; 
     
     //global variable to hold total amount of each coins
     private int totalNikel; 

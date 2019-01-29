@@ -168,7 +168,7 @@ public class PayStationImplTest {
         //ps.empty();
         int totalAddedSinceLastEmptyCall = ps.empty();
         assertEquals("totalAddedSinceLastEmptyCall should be 85",
-               85, totalAddedSinceLastEmptyCall);
+               245, totalAddedSinceLastEmptyCall);
         
          
     }
@@ -195,6 +195,11 @@ public class PayStationImplTest {
         assertEquals("the ticket has been bought so no coin will return",
                 false, number);
         
+        
+        int totalAddedSinceLastEmptyCall = ps.empty();
+        assertEquals("totalAddedSinceLastEmptyCall should be 85",
+               50, totalAddedSinceLastEmptyCall);
+        
         ps.addPayment(10);
         ps.addPayment(10);
         ps.addPayment(10);
@@ -214,12 +219,16 @@ public class PayStationImplTest {
         assertEquals("quarter = 3",
                 3, num3);
         
+        
+        
         ps.addPayment(25);
         ps.addPayment(25);
         Receipt r1 = ps.buy();
         boolean num_of_quarter = coins.containsKey(25);
         boolean num_of_dime = coins.containsKey(10);
         boolean num_of_nikel = coins.containsKey(5);
+        
+        
         
         assertEquals("the ticket has been bought so no coin will return",
                 false, num_of_quarter);
