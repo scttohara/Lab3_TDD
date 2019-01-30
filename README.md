@@ -3,6 +3,7 @@ Lab 3 Software Design
 
 
 Requirements: Explain in your own word what were the requirements for this work.  Did you implement everything that was asked? Did you make additional improvements? 
+
   1. Development should only be done using Test Driven Development.
   2. Commit once a test is added and when the test passes.
   3. Add a method empty() that returns an int that contains the total amount of money collected since the last time empty() was called and empties the int. Money should only be collected after a call to the buy() function.
@@ -17,7 +18,8 @@ Requirements: Explain in your own word what were the requirements for this work.
   12. A call to buy() function clears the map.
   13. All team members must take part in coding. 
   
-  - We believe we've implemented everything that was asked and no additional changes as of the writing of this README file (1/29/19)
+  - We believe we've implemented everything that was asked and we have made no additional changes as of the writing of this README file (1/29/19)
+
 
 Team: List all team members. Shortly explain the contribution of everybody.  
 
