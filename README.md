@@ -26,7 +26,7 @@ Team: List all team members. Shortly explain the contribution of everybody.
 Scott O'Hara:
   -Created the testEmpty() to test the empty function
   -Created the empty() function 
-  -Worked in person on bug fixes with Rattanak on the testCancel() function, the cancel() function, and a bug where totalSinceLastCheck wasn't being saved correctly because it wasnt static
+  -Worked in person on bug fixes with Rattanak on the testCancel() function, the cancel() function, and a bug where totalSinceLastCheck wasn't being saved correctly because it wasn't static
   
 Rattanak Um:
   -Created the testCancel() to test the cancel() function
