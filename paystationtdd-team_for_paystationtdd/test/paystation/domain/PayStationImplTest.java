@@ -165,7 +165,6 @@ public class PayStationImplTest {
         assertEquals("Cancel should clear display",
                 0, ps.readDisplay());
         
-        //ps.empty();
         int totalAddedSinceLastEmptyCall = ps.empty();
         assertEquals("totalAddedSinceLastEmptyCall should be 85",
                245, totalAddedSinceLastEmptyCall);
@@ -184,21 +183,22 @@ public class PayStationImplTest {
         
         ps.addPayment(10);
         Map<Integer, Integer> coins = ps.cancel(); //get the map of the entered coin
-        int num = coins.get(10);
+        int dime = coins.get(10);
         assertEquals("one coin entered will return",
-                1 , num );
+                1 , dime);
         
         ps.addPayment(25);
         ps.addPayment(25);
         Receipt r = ps.buy();
-        boolean number = coins.containsKey(25);
+        boolean quarter1 = coins.containsKey(25);
         assertEquals("the ticket has been bought so no coin will return",
-                false, number);
-        
-        
-        int totalAddedSinceLastEmptyCall = ps.empty();
-        assertEquals("totalAddedSinceLastEmptyCall should be 85",
-               50, totalAddedSinceLastEmptyCall);
+                false, quarter1);
+        boolean dime1 = coins.containsKey(10);
+        assertEquals("the ticket has been bought so no coin will return",
+                false, dime1);
+        boolean nickel1 = coins.containsKey(5);
+        assertEquals("the ticket has been bought so no coin will return",
+                false, nickel1);
         
         ps.addPayment(10);
         ps.addPayment(10);
@@ -209,30 +209,32 @@ public class PayStationImplTest {
         ps.addPayment(25);
         ps.addPayment(25);
         coins = ps.cancel();
-        int num1 = coins.get(5);
-        int num2 = coins.get(10);
-        int num3 = coins.get(25);
-        assertEquals("mixture of coins entered will return \n nikel = 2",
-                2, num1);
+        int nickel2 = coins.get(5);
+        int dime2 = coins.get(10);
+        int quarter2 = coins.get(25);
+        assertEquals("mixture of coins entered will return \n nickel = 2",
+                2, nickel2);
         assertEquals("Dime = 3",
-                3, num2);
+                3, dime2);
         assertEquals("quarter = 3",
-                3, num3);
-        
-        
+                3, quarter2);
         
         ps.addPayment(25);
         ps.addPayment(25);
         Receipt r1 = ps.buy();
-        boolean num_of_quarter = coins.containsKey(25);
-        boolean num_of_dime = coins.containsKey(10);
-        boolean num_of_nikel = coins.containsKey(5);
         
         
-        
+        boolean num_of_quarters = coins.containsKey(25);
         assertEquals("the ticket has been bought so no coin will return",
-                false, num_of_quarter);
+                false, num_of_quarters);
+        
+        boolean num_of_dimes = coins.containsKey(10);
         assertEquals("the ticket has been bought so no coin will return",
-                false, num_of_nikel);
+                false, num_of_dimes);
+        
+        boolean num_of_nickels = coins.containsKey(5);
+        assertEquals("the ticket has been bought so no coin will return",
+                false, num_of_nickels);
+        
     }
 }
